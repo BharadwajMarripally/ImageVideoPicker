@@ -14,7 +14,21 @@ import com.google.gson.Gson
 class PickImageVideo(var myActivity: AppCompatActivity) {
     lateinit var pickerListener: PickerListener
     lateinit var myOnResultCallback: OnResultCallback
-
+    val pickerLauncher = myActivity.registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            //  you will get result here in result.data
+            val intent = result.data
+            if (intent != null) {
+                val galleryModelObj = intent.getStringExtra(GalleryModel::class.java.name)
+                if (!TextUtils.isEmpty(galleryModelObj)) {
+                    val galleryObj = Gson().fromJson(galleryModelObj, GalleryModel::class.java)
+                    pickerListener.onPickerResult(galleryObj)
+                }
+            }
+        }
+    }
     fun showGallery(
         pickerType: String = PickerType.BottomSheet.name,
         pickerMode: String = PickerMode.IMAGE.name,
@@ -24,21 +38,7 @@ class PickImageVideo(var myActivity: AppCompatActivity) {
         this.pickerListener = pickerListener
         myOnResultCallback = onResultCallback!!
 
-        val pickerLauncher = myActivity.registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                //  you will get result here in result.data
-                val intent = result.data
-                if (intent != null) {
-                    val galleryModelObj = intent.getStringExtra(GalleryModel::class.java.name)
-                    if (!TextUtils.isEmpty(galleryModelObj)) {
-                        val galleryObj = Gson().fromJson(galleryModelObj, GalleryModel::class.java)
-                        pickerListener.onPickerResult(galleryObj)
-                    }
-                }
-            }
-        }
+
         PickerActivity.launchPicker(
             myActivity,
             pickerType, pickerMode, pickerLauncher
