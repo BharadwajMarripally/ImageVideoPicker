@@ -1,5 +1,6 @@
 [versions]
 agp = "8.8.0"
+agpVersion = "8.8.0"
 kotlin = "2.0.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -41,5 +42,6 @@ ssp-android = { module = "com.intuit.ssp:ssp-android", version.ref = "sspAndroid
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agpVersion" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
