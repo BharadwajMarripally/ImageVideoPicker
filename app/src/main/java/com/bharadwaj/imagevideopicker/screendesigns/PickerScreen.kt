@@ -185,7 +185,7 @@ fun BottomSheetTypePicker(activity: PickerActivity) {
                                 val intent = Intent(Intent.ACTION_GET_CONTENT)
                                 intent.type = "image/*"
                                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-                                galleryImageLauncher.launch("video/*")
+                                galleryImageLauncher.launch("image/*")
                             },
                             interactionSource = remember { MutableInteractionSource() },
                             indication = ripple(color = colorResource(R.color.black))
