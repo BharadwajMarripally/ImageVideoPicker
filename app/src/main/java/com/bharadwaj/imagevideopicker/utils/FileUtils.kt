@@ -10,10 +10,11 @@ import java.io.FileOutputStream
 
 object FileUtils {
 
-    fun saveFileFromUri(context: Context, uri: Uri, destinationPath: String): File? {
+    fun getFileFromUri(context: Context, uri: Uri): File? {
+        val destination = context.cacheDir.path
         return try {
             val inputStream = context.contentResolver.openInputStream(uri)
-            val file = File(destinationPath)
+            val file = File(destination)
             inputStream?.use { input ->
                 FileOutputStream(file).use { output ->
                     input.copyTo(output)
@@ -24,6 +25,10 @@ object FileUtils {
             e.printStackTrace()
             null
         }
+    }
+
+    fun getFile(path: String): File? {
+        return File(path)
     }
 
     fun getFileExtension(context: Context, uri: Uri): String? {

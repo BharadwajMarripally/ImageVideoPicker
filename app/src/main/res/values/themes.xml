@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.ImageVideoPicker" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.ImageVideoPicker" parent="Theme.Material3.DayNight.NoActionBar" >
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item> <!-- Prevents cached black background -->
+        <item name="android:windowIsFloating">true</item> <!-- Prevents full-screen black background -->
+    </style>
 
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
